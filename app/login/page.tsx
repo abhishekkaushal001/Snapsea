@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-const page = () => {
+const LoginPage = () => {
   const [isLoading, setLoading] = useState(false);
 
   async function loginWithGoogle() {
@@ -69,4 +69,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LoginPage;

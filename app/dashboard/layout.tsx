@@ -7,6 +7,8 @@ import { GiBigWave } from "react-icons/gi";
 import { FiUserPlus } from "react-icons/fi";
 import Image from "next/image";
 import SignOutButton from "@/components/ui/SignOutButton";
+import FriendRequestsSideBar from "@/components/ui/FriendRequestsSideBar";
+import { db } from "@/lib/db";
 
 interface OverviewOptions {
   id: number;
@@ -30,8 +32,11 @@ const Layout = async ({ children }: PropsWithChildren) => {
   if (!session) {
     return redirect("/");
   }
-
   const user = session.user;
+
+  const requests = (
+    await db.smembers(`user:${user.id}:incoming_friend_requests`)
+  ).length;
 
   return (
     <div className="w-full flex h-screen">
@@ -43,9 +48,11 @@ const Layout = async ({ children }: PropsWithChildren) => {
           <GiBigWave className="h-8 w-auto text-indigo-600" />
           <span className="align-middle pt-1">Snapsea</span>
         </Link>
+
         <div className="text-xs font-semibold leading-6 text-gray-400 mt-12">
           Overview
         </div>
+
         <div className="mt-2">
           <ul className="-mx-2 space-y-1">
             {overviewOptions.map((overview) => (
@@ -61,6 +68,13 @@ const Layout = async ({ children }: PropsWithChildren) => {
                 </Link>
               </li>
             ))}
+
+            <li>
+              <FriendRequestsSideBar
+                requestCount={requests}
+                sessionId={user.id}
+              />
+            </li>
           </ul>
         </div>
         <div className="mt-5 flex flex-col flex-1 gap-y-7">
