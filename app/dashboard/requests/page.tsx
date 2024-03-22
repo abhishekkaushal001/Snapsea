@@ -25,7 +25,10 @@ const RequestsPage = async () => {
     await db.smembers(`user:${id}:incoming_friend_requests`)
   ).map((req) => `user:${req}`);
 
-  const reqUsers: User[] = await db.mget(requests);
+  let reqUsers;
+  if (requests.length !== 0) {
+    reqUsers = (await db.mget(requests)) as User[] | null | undefined;
+  }
 
   return (
     <main className="p-10">
