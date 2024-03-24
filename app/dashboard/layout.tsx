@@ -9,6 +9,7 @@ import Image from "next/image";
 import SignOutButton from "@/components/ui/SignOutButton";
 import FriendRequestsSideBar from "@/components/ui/FriendRequestsSideBar";
 import { db } from "@/lib/db";
+import SideBarChatOptions from "@/components/ui/SideBarChatOptions";
 
 interface OverviewOptions {
   id: number;
@@ -34,9 +35,19 @@ const Layout = async ({ children }: PropsWithChildren) => {
   }
   const user = session.user;
 
+  const getFriendsByUserId = async () => {
+    const id = (await db.smembers(`user:${user.id}:friends`)).map(
+      (id) => `user:${id}`
+    );
+    const friends = await db.mget(id);
+    return friends;
+  };
+
   const requests = (
     await db.smembers(`user:${user.id}:incoming_friend_requests`)
   ).length;
+
+  const friendsId = (await getFriendsByUserId()) as User[];
 
   return (
     <div className="w-full flex h-screen">
@@ -77,14 +88,17 @@ const Layout = async ({ children }: PropsWithChildren) => {
             </li>
           </ul>
         </div>
-        <div className="mt-5 flex flex-col flex-1 gap-y-7">
-          <div className="text-xs font-semibold text-gray-400 leading-6">
-            Chats
+        {friendsId.length > 0 ? (
+          <div className="mt-5 flex flex-col flex-1 mb-5">
+            <div className="text-xs font-semibold text-gray-400 leading-6">
+              Your Chats
+            </div>
+
+            <div className="flex flex-1 flex-col mt-5 gap-y-7">
+              <SideBarChatOptions friends={friendsId} userId={user.id} />
+            </div>
           </div>
-          <ul>
-            <li>Chats here</li>
-          </ul>
-        </div>
+        ) : null}
         <div className="-mx-6 mt-auto flex items-center">
           <div className="flex flex-1 items-center gap-x-4 px-6 py-4 text-sm font-semibold leading-6 text-gray-900">
             <div className="relative h-10 w-10 bg-gray-50">

@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { GiBigWave } from "react-icons/gi";
 
 const LoginPage = () => {
   const [isLoading, setLoading] = useState(false);
@@ -23,7 +24,9 @@ const LoginPage = () => {
     <>
       <div className="min-h-screen w-full flex flex-col items-center justify-start pt-20">
         <div className="flex flex-col items-center justify-start text-center m-4">
-          <div className="">logo</div>
+          <div className="">
+            <GiBigWave className="h-16 w-auto text-slate-800 rounded-full" />
+          </div>
           <div className="mt-14 font-bold text-4xl tracking-tight text-gray-900">
             Sign in to your Account
           </div>
