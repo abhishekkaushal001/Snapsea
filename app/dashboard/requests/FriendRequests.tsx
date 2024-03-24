@@ -97,7 +97,7 @@ const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
               aria-label="deny request"
               className="bg-red-500 hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center justify-center text-white p-2 rounded-md"
               onClick={() => denyRequest(req.id)}
-              disabled={isProcessing}
+              disabled={isdenying}
             >
               {isdenying && <Loader2 className="animate-spin h-4 w-4 mr-1" />}
               <span>Delete</span>

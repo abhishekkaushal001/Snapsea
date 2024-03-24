@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         return token;
       }
+      await db.sadd("user:list", dbUser.id);
 
       return {
         id: dbUser.id,

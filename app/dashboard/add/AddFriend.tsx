@@ -23,7 +23,7 @@ const AddFriend = () => {
   return (
     <div>
       <form
-        className="max-w-sm mt-8"
+        className="max-w-md mt-14"
         onSubmit={handleSubmit(async (data, event) => {
           event?.preventDefault();
           setSending(true);
@@ -49,11 +49,14 @@ const AddFriend = () => {
           setSending(false);
         })}
       >
-        <label htmlFor="email" className="text-sm text-gray-900">
+        <label
+          htmlFor="email"
+          className="text-sm text-indigo-500 ml-2 font-medium"
+        >
           Add a friend by email
         </label>
 
-        <div className="flex gap-3 mt-3">
+        <div className="flex gap-3 mt-2">
           <input
             {...register("email")}
             type="text"

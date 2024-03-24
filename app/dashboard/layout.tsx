@@ -96,9 +96,9 @@ const Layout = async ({ children }: PropsWithChildren) => {
                 src={user.image || ""}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col max-w-32">
               <span aria-hidden>{user.name}</span>
-              <span aria-hidden className="text-zinc-400 text-xs">
+              <span aria-hidden className="text-zinc-400 text-xs truncate">
                 {user.email}
               </span>
             </div>
