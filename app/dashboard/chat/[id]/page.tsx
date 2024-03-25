@@ -1,6 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Message } from "@/lib/validation";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
@@ -12,9 +13,20 @@ interface Props {
 }
 
 async function getChatMessages(chatId: string) {
-  const results: string[] = await db.zrange(`user:${chatId}:messages`, 0, -1);
-  const dbMessages = results.map((res) => JSON.parse(res) as Message).reverse();
-  return dbMessages;
+  // const results: string[] = await db.zrange(`user:${chatId}:messages`, 0, -1);
+  const response = await axios.get(
+    `${process.env.UPSTASH_REDIS_REST_URL}/zrange/user:${chatId}:messages/0/-1`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}`,
+      },
+    }
+  );
+  const result: string[] = response.data.result;
+  const results = result.map((res) => JSON.parse(res) as Message).reverse();
+
+  // const dbMessages = results.map((res) => JSON.parse(res) as Message).reverse();
+  return results;
 }
 
 const ChatPage = async ({ params }: Props) => {
@@ -62,6 +74,8 @@ const ChatPage = async ({ params }: Props) => {
         <MessagesSection
           initialMessages={initialMessages}
           sessionId={user.id}
+          partner={partner}
+          user={user as User}
         />
 
         <div className="w-full px-5 border-t border-gray-200 pb-9 pt-4">

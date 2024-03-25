@@ -52,7 +52,7 @@ const ChatInputPage = ({ user, chatId }: Props) => {
       />
       <button
         disabled={isSending}
-        className="bg-indigo-500 disabled:bg-gray-400 hover:bg-indigo-600 text-white font-medium px-5 py-3 rounded-lg flex align-middle items-center space-x-2 min-w-fit h-fit"
+        className="bg-neutral-900 disabled:bg-gray-400 hover:bg-neutral-950 text-white font-medium px-5 py-3 rounded-lg flex align-middle items-center space-x-2 min-w-fit h-fit"
         onClick={() => sendMessage()}
         type="submit"
       >

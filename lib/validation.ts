@@ -8,7 +8,7 @@ export const messageSchema = z.object({
   id: z.string(),
   senderId: z.string(),
   text: z.string(),
-  timeStamp: z.number(),
+  timestamp: z.number(),
 });
 
 export type Message = z.infer<typeof messageSchema>;

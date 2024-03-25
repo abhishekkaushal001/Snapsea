@@ -1,16 +1,30 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validation";
-import React, { useRef, useState } from "react";
+import { format } from "date-fns";
+import Image from "next/image";
+import { useRef, useState } from "react";
 
 interface Props {
   initialMessages: Message[];
   sessionId: string;
+  user: User;
+  partner: User;
 }
 
-const MessagesSection = ({ initialMessages }: Props) => {
+const MessagesSection = ({
+  initialMessages,
+  sessionId,
+  user,
+  partner,
+}: Props) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const formatTimeStamp = (time: number) => {
+    return format(time, "HH:mm");
+  };
 
   return (
     <div
@@ -18,7 +32,60 @@ const MessagesSection = ({ initialMessages }: Props) => {
       className="h-full flex flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto"
     >
       <div ref={scrollRef} />
-      MessagesSection
+
+      {messages.map((msg, index) => {
+        const isCurrentUser = msg.senderId === sessionId;
+        const hasNextMessage =
+          messages[index - 1]?.senderId === messages[index].senderId;
+
+        return (
+          <div className="chat-message" key={msg.id}>
+            <div
+              className={cn("flex items-end", { "justify-end": isCurrentUser })}
+            >
+              <div
+                className={cn(
+                  "flex flex-col space-y-2 text-base max-w-xs mx-2",
+                  {
+                    "order-1 items-end": isCurrentUser,
+                    "order-2 items-start": !isCurrentUser,
+                  }
+                )}
+              >
+                <span
+                  className={cn("px-4 py-2 rounded-lg inline-block", {
+                    "bg-indigo-600 text-white": isCurrentUser,
+                    "bg-gray-200 text-gray-900": !isCurrentUser,
+                    "rounded-br-none": !hasNextMessage && isCurrentUser,
+                    "rounded-bl-none": !hasNextMessage && !isCurrentUser,
+                  })}
+                >
+                  {msg.text}{" "}
+                  <span className="ml-2 text-xs text-gray-400">
+                    {formatTimeStamp(msg.timestamp)}
+                  </span>
+                </span>
+              </div>
+
+              <div
+                className={cn("relative w-7 h-7", {
+                  "order-2": isCurrentUser,
+                  "order-1": !isCurrentUser,
+                  invisible: hasNextMessage,
+                })}
+              >
+                <Image
+                  fill
+                  referrerPolicy="no-referrer"
+                  alt={isCurrentUser ? user.name : partner.name}
+                  src={isCurrentUser ? user.image : partner.image}
+                  className="rounded-full"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
