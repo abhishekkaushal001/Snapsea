@@ -13,7 +13,6 @@ interface Props {
 }
 
 async function getChatMessages(chatId: string) {
-  // const results: string[] = await db.zrange(`user:${chatId}:messages`, 0, -1);
   const response = await axios.get(
     `${process.env.UPSTASH_REDIS_REST_URL}/zrange/user:${chatId}:messages/0/-1`,
     {
@@ -25,7 +24,6 @@ async function getChatMessages(chatId: string) {
   const result: string[] = response.data.result;
   const results = result.map((res) => JSON.parse(res) as Message).reverse();
 
-  // const dbMessages = results.map((res) => JSON.parse(res) as Message).reverse();
   return results;
 }
 
@@ -76,6 +74,7 @@ const ChatPage = async ({ params }: Props) => {
           sessionId={user.id}
           partner={partner}
           user={user as User}
+          chatId={params.id}
         />
 
         <div className="w-full px-5 border-t border-gray-200 pb-9 pt-4">

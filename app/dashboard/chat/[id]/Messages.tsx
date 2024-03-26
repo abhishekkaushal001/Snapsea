@@ -1,16 +1,18 @@
 "use client";
 
+import { pusherClient } from "@/lib/pusher";
 import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validation";
 import { format } from "date-fns";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   initialMessages: Message[];
   sessionId: string;
   user: User;
   partner: User;
+  chatId: string;
 }
 
 const MessagesSection = ({
@@ -18,9 +20,23 @@ const MessagesSection = ({
   sessionId,
   user,
   partner,
+  chatId,
 }: Props) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    pusherClient.subscribe(`chat__${chatId}`);
+    const newMessageHandler = (msg: Message) => {
+      setMessages((prev) => [msg, ...prev]);
+    };
+    pusherClient.bind("new_message", newMessageHandler);
+
+    return () => {
+      pusherClient.unsubscribe(`chat__${chatId}`);
+      pusherClient.unbind("new_message", newMessageHandler);
+    };
+  }, []);
 
   const formatTimeStamp = (time: number) => {
     return format(time, "HH:mm");

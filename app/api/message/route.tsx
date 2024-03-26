@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -48,6 +49,8 @@ export async function POST(req: NextRequest) {
       text,
       timestamp,
     };
+
+    await pusherServer.trigger(`chat__${chatId}`, "new_message", message);
 
     await db.zadd(`user:${chatId}:messages`, {
       score: timestamp,
