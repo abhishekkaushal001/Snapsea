@@ -1,26 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "./page";
 import Image from "next/image";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { pusherClient } from "@/lib/pusher";
 
 interface Props {
-  incomingRequests: User[] | null | undefined;
+  incomingRequests: User[];
   sessionId: string;
 }
 
 const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
-  const [requests, setRequests] = useState<User[] | null | undefined>(
-    incomingRequests
-  );
+  const [requests, setRequests] = useState<User[]>(incomingRequests);
   const [isProcessing, setProcessing] = useState(false);
   const [isdenying, setdeny] = useState(false);
-
   const router = useRouter();
+
+  useEffect(() => {
+    pusherClient.subscribe(`user__${sessionId}__incoming_friend_requests`);
+
+    const friendRequestHandler = (request: User) => {
+      if (requests && requests.length > 0) {
+        setRequests((prev) => [...prev, request]);
+      } else {
+        setRequests([request]);
+      }
+    };
+
+    pusherClient.bind("incoming_friend_requests", friendRequestHandler);
+
+    return () => {
+      pusherClient.unsubscribe(`user__${sessionId}__incoming_friend_requests`);
+      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+    };
+  }, []);
 
   if (!requests || requests.length === 0) {
     return (
@@ -59,7 +76,7 @@ const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
     <div className="flex flex-col gap-3 mt-4 min-w-fit">
       {requests.map((req) => (
         <div
-          className="flex items-center min-w-fit justify-center space-x-7 hover:shadow-sm p-5 border border-gray-100 rounded-md hover:border-gray-200"
+          className="flex items-center min-w-fit justify-center space-x-7 hover:shadow-sm p-5 border border-gray-200 rounded-md hover:border-gray-400 transition-all ease-in-out"
           key={req.id}
         >
           <div className="relative h-[50px] w-[50px] items-center justify-center">

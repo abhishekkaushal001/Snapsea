@@ -27,7 +27,7 @@ const RequestsPage = async () => {
 
   let reqUsers;
   if (requests.length !== 0) {
-    reqUsers = (await db.mget(requests)) as User[] | null | undefined;
+    reqUsers = (await db.mget(requests)) as User[];
   }
 
   return (
@@ -35,7 +35,7 @@ const RequestsPage = async () => {
       <h1 className="text-5xl text-gray-900 font-bold mb-8">Friend requests</h1>
 
       <div className="flex flex-col gap-4">
-        <FriendRequests incomingRequests={reqUsers} sessionId={id} />
+        <FriendRequests incomingRequests={reqUsers!} sessionId={id} />
       </div>
     </main>
   );

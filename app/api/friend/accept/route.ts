@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -51,6 +52,12 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    await pusherServer.trigger(
+      `user__${user.id}__incoming_friend_requests`,
+      "request_accept",
+      {}
+    );
 
     await db.sadd(`user:${user.id}:friends`, body.id);
 

@@ -39,7 +39,7 @@ const Layout = async ({ children }: PropsWithChildren) => {
     const id = (await db.smembers(`user:${user.id}:friends`)).map(
       (id) => `user:${id}`
     );
-    const friends = await db.mget(id);
+    const friends = id.length > 0 ? await db.mget(id) : [];
     return friends;
   };
 

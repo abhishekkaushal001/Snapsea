@@ -1,7 +1,8 @@
 "use client";
 
+import { pusherClient } from "@/lib/pusher";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 
 interface Props {
@@ -11,6 +12,27 @@ interface Props {
 
 const FriendRequestsSideBar = ({ requestCount, sessionId }: Props) => {
   const [requests, setRequests] = useState<number>(requestCount);
+
+  useEffect(() => {
+    pusherClient.subscribe(`user__${sessionId}__incoming_friend_requests`);
+    const friendRequestHnadler = () => {
+      setRequests((prev) => prev + 1);
+    };
+    const requestActionHandler = () => {
+      setRequests((prev) => prev - 1);
+    };
+
+    pusherClient.bind("incoming_friend_requests", friendRequestHnadler);
+    pusherClient.bind("request_deny", requestActionHandler);
+    pusherClient.bind("request_accept", requestActionHandler);
+
+    return () => {
+      pusherClient.unsubscribe(`user__${sessionId}__incoming_friend_requests`);
+      pusherClient.unbind("incoming_friend_requests", friendRequestHnadler);
+      pusherClient.unbind("request_deny", requestActionHandler);
+      pusherClient.unbind("request_accept", requestActionHandler);
+    };
+  }, []);
 
   return (
     <>
