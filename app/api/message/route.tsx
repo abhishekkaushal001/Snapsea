@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const sender = await db.get(`user:${user.id}`);
+    const sender = (await db.get(`user:${user.id}`)) as User;
 
     const timestamp = Date.now();
 
@@ -51,6 +51,15 @@ export async function POST(req: NextRequest) {
     };
 
     await pusherServer.trigger(`chat__${chatId}`, "new_message", message);
+    await pusherServer.trigger(
+      `user__${friendId}__chats`,
+      "new_message_notification",
+      {
+        ...message,
+        ...sender,
+        chatId,
+      }
+    );
 
     await db.zadd(`user:${chatId}:messages`, {
       score: timestamp,

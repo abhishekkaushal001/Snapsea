@@ -1,15 +1,16 @@
+import FriendRequestsSideBar from "@/components/ui/FriendRequestsSideBar";
+import NotificationsProvider from "@/components/ui/NotificationsProvider";
+import SideBarChatOptions from "@/components/ui/SideBarChatOptions";
+import SignOutButton from "@/components/ui/SignOutButton";
 import { authOptions } from "@/lib/auth";
+import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { PropsWithChildren, ReactNode } from "react";
-import { GiBigWave } from "react-icons/gi";
 import { FiUserPlus } from "react-icons/fi";
-import Image from "next/image";
-import SignOutButton from "@/components/ui/SignOutButton";
-import FriendRequestsSideBar from "@/components/ui/FriendRequestsSideBar";
-import { db } from "@/lib/db";
-import SideBarChatOptions from "@/components/ui/SideBarChatOptions";
+import { GiBigWave } from "react-icons/gi";
 
 interface OverviewOptions {
   id: number;
@@ -29,7 +30,6 @@ const overviewOptions: OverviewOptions[] = [
 
 const Layout = async ({ children }: PropsWithChildren) => {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     return redirect("/");
   }
@@ -51,6 +51,8 @@ const Layout = async ({ children }: PropsWithChildren) => {
 
   return (
     <div className="w-full flex h-screen">
+      <NotificationsProvider userId={user.id} />
+
       <div className="flex h-full w-full max-w-xs grow flex-col gap-y-3 overflow-y-auto border-r border-gray-200 bg-white px-6">
         <Link
           href="/dashboard"
