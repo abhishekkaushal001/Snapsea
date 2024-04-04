@@ -36,7 +36,7 @@ const MessagesSection = ({
       pusherClient.unsubscribe(`chat__${chatId}`);
       pusherClient.unbind("new_message", newMessageHandler);
     };
-  }, []);
+  }, [chatId]);
 
   const formatTimeStamp = (time: number) => {
     return format(time, "HH:mm");
@@ -45,7 +45,7 @@ const MessagesSection = ({
   return (
     <div
       id="messages"
-      className="h-full flex flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto"
+      className="h-full flex flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar"
     >
       <div ref={scrollRef} />
 
