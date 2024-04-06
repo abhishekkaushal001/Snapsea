@@ -47,7 +47,7 @@ const ChatPage = async ({ params }: Props) => {
   return (
     <div className="w-full">
       <div className="flex flex-col h-full">
-        <div className="w-full flex justify-between border-b-2 border-gray-200">
+        <div className="w-full flex justify-between border-b-2 border-gray-200 px-5">
           <div className="flex align-middle items-center justify-center gap-5 py-3">
             <div className="relative h-16 w-16">
               <Image
