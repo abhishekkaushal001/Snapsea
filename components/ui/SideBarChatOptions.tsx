@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Data } from "./NotificationsProvider";
+import CustomToast from "./CustomToast";
 
 interface Props {
   friends: User[];
@@ -25,7 +26,15 @@ const SideBarChatOptions = ({ friends, userId }: Props) => {
     const messageHandler = (data: Data) => {
       if (pathname.includes(data.chatId)) return;
 
-      toast.custom(data.text);
+      toast.custom((t) => (
+        <CustomToast
+          t={t}
+          chatId={data.chatId}
+          userImg={data.image}
+          userName={data.name}
+          userMsg={data.text}
+        />
+      ));
 
       setUnseenMessages((prev) => [...prev, data]);
     };
