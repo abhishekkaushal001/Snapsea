@@ -32,7 +32,7 @@ const FriendRequestsSideBar = ({ requestCount, sessionId }: Props) => {
       pusherClient.unbind("request_deny", requestActionHandler);
       pusherClient.unbind("request_accept", requestActionHandler);
     };
-  }, []);
+  }, [sessionId]);
 
   return (
     <>

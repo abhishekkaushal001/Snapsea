@@ -45,7 +45,7 @@ const SideBarChatOptions = ({ friends, userId }: Props) => {
       pusherClient.unsubscribe(`user__${userId}__chats`);
       pusherClient.unbind("new_message_notification", messageHandler);
     };
-  }, [pathname, router]);
+  }, [pathname, router, userId]);
 
   useEffect(() => {
     if (pathname.includes("chat")) {

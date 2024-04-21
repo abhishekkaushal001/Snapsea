@@ -37,7 +37,7 @@ const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
       pusherClient.unsubscribe(`user__${sessionId}__incoming_friend_requests`);
       pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
     };
-  }, []);
+  }, [requests, sessionId]);
 
   if (!requests || requests.length === 0) {
     return (

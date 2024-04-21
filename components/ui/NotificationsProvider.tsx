@@ -26,7 +26,7 @@ const NotificationsProvider = ({ userId }: Props) => {
       pusherClient.unsubscribe(`user__${userId}__chats`);
       pusherClient.unbind("new_message_notification", messageHandler);
     };
-  }, []);
+  }, [userId]);
   return <></>;
 };
 
