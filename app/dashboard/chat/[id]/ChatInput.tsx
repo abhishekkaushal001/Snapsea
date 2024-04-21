@@ -56,11 +56,11 @@ const ChatInputPage = ({ user, chatId }: Props) => {
         onClick={() => sendMessage()}
         type="submit"
       >
-        <span className="text-lg">Send</span>
+        <span className="text-sm md:text-lg">Send</span>
         {isSending ? (
-          <Loader2 className="animate-spin h-6 w-6" />
+          <Loader2 className="animate-spin h-4 w-4 md:h-6 md:w-6" />
         ) : (
-          <IoIosSend className="h-8 w-8" />
+          <IoIosSend className="h-5 w-5 md:h-8 md:w-8" />
         )}
       </button>
     </div>

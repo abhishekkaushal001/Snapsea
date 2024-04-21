@@ -45,7 +45,7 @@ const MessagesSection = ({
   return (
     <div
       id="messages"
-      className="h-full flex flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar"
+      className="h-full flex flex-1 flex-col-reverse gap-2 md:gap-4 p-3 overflow-y-auto scrollbar"
     >
       <div ref={scrollRef} />
 
@@ -61,7 +61,7 @@ const MessagesSection = ({
             >
               <div
                 className={cn(
-                  "flex flex-col space-y-2 text-base max-w-xs mx-2",
+                  "flex flex-col space-y-2 text-sm md:text-base max-w-xs mx-2",
                   {
                     "order-1 items-end": isCurrentUser,
                     "order-2 items-start": !isCurrentUser,
@@ -69,12 +69,15 @@ const MessagesSection = ({
                 )}
               >
                 <span
-                  className={cn("px-4 py-2 rounded-lg inline-block", {
-                    "bg-indigo-600 text-white": isCurrentUser,
-                    "bg-gray-200 text-gray-900": !isCurrentUser,
-                    "rounded-br-none": !hasNextMessage && isCurrentUser,
-                    "rounded-bl-none": !hasNextMessage && !isCurrentUser,
-                  })}
+                  className={cn(
+                    "px-3 py-1 md:px-4 md:py-2 rounded-lg inline-block",
+                    {
+                      "bg-indigo-600 text-white": isCurrentUser,
+                      "bg-gray-200 text-gray-900": !isCurrentUser,
+                      "rounded-br-none": !hasNextMessage && isCurrentUser,
+                      "rounded-bl-none": !hasNextMessage && !isCurrentUser,
+                    }
+                  )}
                 >
                   {msg.text}{" "}
                   <span className="ml-2 text-xs text-gray-400">

@@ -46,10 +46,10 @@ const ChatPage = async ({ params }: Props) => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full max-h-[91vh] md:max-h-none">
         <div className="w-full flex justify-between border-b-2 border-gray-200 px-5">
-          <div className="flex align-middle items-center justify-center gap-5 py-3">
-            <div className="relative h-16 w-16">
+          <div className="flex align-middle items-center justify-center gap-5 py-1.5 md:py-3">
+            <div className="relative h-10 w-10 md:h-16 md:w-16">
               <Image
                 alt={partner.name}
                 src={partner.image}
@@ -59,10 +59,10 @@ const ChatPage = async ({ params }: Props) => {
               />
             </div>
             <div className="flex flex-col align-middle justify-center">
-              <p className="text-2xl font-semibold text-slate-800">
+              <p className="text-lg md:text-2xl font-semibold text-slate-800">
                 {partner.name}
               </p>
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-xs md:text-sm font-medium text-gray-500">
                 {partner.email}
               </p>
             </div>

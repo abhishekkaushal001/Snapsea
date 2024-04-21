@@ -1,3 +1,4 @@
+import MobileLayout from "@/components/MobileLayout";
 import FriendRequestsSideBar from "@/components/ui/FriendRequestsSideBar";
 import NotificationsProvider from "@/components/ui/NotificationsProvider";
 import SideBarChatOptions from "@/components/ui/SideBarChatOptions";
@@ -19,7 +20,7 @@ interface OverviewOptions {
   icon: ReactNode;
 }
 
-const overviewOptions: OverviewOptions[] = [
+export const overviewOptions: OverviewOptions[] = [
   {
     id: 1,
     name: "Add friend",
@@ -50,10 +51,13 @@ const Layout = async ({ children }: PropsWithChildren) => {
   const friendsId = (await getFriendsByUserId()) as User[];
 
   return (
-    <div className="w-full flex h-screen">
+    <div className="w-full max-h-[88vh] md:flex md:max-h-screen md:h-screen">
       <NotificationsProvider userId={user.id} />
+      <div className="md:hidden">
+        <MobileLayout friendsId={friendsId} requests={requests} user={user} />
+      </div>
 
-      <div className="flex h-full w-full max-w-xs grow flex-col gap-y-3 overflow-y-auto border-r border-gray-200 bg-white px-6">
+      <div className="hidden md:flex h-full w-full max-w-xs grow flex-col gap-y-3 overflow-y-auto border-r border-gray-200 bg-white px-6">
         <Link
           href="/dashboard"
           className="flex shrink-0 h-16 text-3xl font-semibold align-middle items-center text-slate-800 gap-x-2"
