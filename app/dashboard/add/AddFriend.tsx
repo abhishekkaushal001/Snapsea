@@ -23,7 +23,7 @@ const AddFriend = () => {
   return (
     <div>
       <form
-        className="max-w-md mt-14"
+        className="max-w-md mt-5 md:mt-14"
         onSubmit={handleSubmit(async (data, event) => {
           event?.preventDefault();
           setSending(true);
@@ -51,18 +51,18 @@ const AddFriend = () => {
       >
         <label
           htmlFor="email"
-          className="text-sm text-indigo-500 ml-2 font-medium"
+          className="text-xs md:text-sm text-indigo-500 ml-2 font-medium"
         >
           Add a friend by email
         </label>
 
-        <div className="flex gap-3 mt-2">
+        <div className="flex gap-3 mt-1 md:mt-2">
           <input
             {...register("email")}
             type="text"
             id="email"
             placeholder="user@example.com"
-            className="border-0 border-gray-400 rounded-md px-3 py-[6px] outline-none text-gray-900 w-full shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="border-0 border-gray-400 rounded-md px-2 py-1 md:px-3 md:py-[6px] outline-none text-gray-900 w-full shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
           <Button
             className="text-nowrap"

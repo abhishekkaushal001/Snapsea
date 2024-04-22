@@ -77,7 +77,7 @@ const ChatPage = async ({ params }: Props) => {
           chatId={params.id}
         />
 
-        <div className="w-full px-5 border-t border-gray-200 pb-9 pt-4">
+        <div className="w-full px-2 md:px-5 border-t border-gray-200 pb-3 pt-3 md:pb-9 md:pt-4">
           <ChatInputPage chatId={params.id} user={partner} />
         </div>
       </div>

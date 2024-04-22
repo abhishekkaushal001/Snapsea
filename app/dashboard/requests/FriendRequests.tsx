@@ -73,7 +73,7 @@ const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 mt-4 min-w-fit">
+    <div className="flex flex-col gap-3 mt-1 md:mt-4 min-w-fit">
       {requests.map((req) => (
         <div
           className="flex items-center min-w-fit justify-center space-x-7 hover:shadow-sm p-5 border border-gray-200 rounded-md hover:border-gray-400 transition-all ease-in-out"

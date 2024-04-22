@@ -36,7 +36,7 @@ const UsersSendRequest = ({ email }: { email: string }) => {
         {isSending && <Loader2 className="h-4 w-4 animate-spin" />}
         {!isSending && !sent && (
           <span className="text-white font-medium text-base flex gap-3 align-middle justify-center items-center">
-            <FaUserPlus className="h-5 w-5" />{" "}
+            <FaUserPlus className="h-4 w-4 md:h-5 md:w-5" />{" "}
           </span>
         )}
         {sent && <Check className="h-5 w-5" />}

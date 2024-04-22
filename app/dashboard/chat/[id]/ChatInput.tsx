@@ -39,7 +39,7 @@ const ChatInputPage = ({ user, chatId }: Props) => {
       <input
         type="text"
         ref={inputRef}
-        className="w-full px-5 pt-5 pb-10 border border-gray-300 focus:outline-indigo-600 rounded-lg"
+        className="w-full px-2 pt-3 pb-10 text-sm md:text-base md:px-5 md:pt-5 md:pb-10 border border-gray-300 focus:outline-indigo-600 rounded-lg"
         placeholder={`Message ${user.name}`}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {

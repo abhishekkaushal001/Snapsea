@@ -3,15 +3,16 @@
 import { overviewOptions } from "@/app/dashboard/layout";
 import { Dialog, Transition } from "@headlessui/react";
 import { Menu, X } from "lucide-react";
+import { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { GiBigWave } from "react-icons/gi";
 import Button from "./ui/Button";
 import FriendRequestsSideBar from "./ui/FriendRequestsSideBar";
 import SideBarChatOptions from "./ui/SideBarChatOptions";
 import SignOutButton from "./ui/SignOutButton";
-import { User } from "next-auth";
+import { usePathname } from "next/navigation";
 
 interface Props {
   friendsId: User[];
@@ -21,6 +22,12 @@ interface Props {
 
 export default function MobileLayout({ friendsId, requests, user }: Props) {
   const [open, setOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className="md:hidden">
