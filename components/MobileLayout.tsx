@@ -3,7 +3,6 @@
 import { overviewOptions } from "@/app/dashboard/layout";
 import { Dialog, Transition } from "@headlessui/react";
 import { Menu, X } from "lucide-react";
-import { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
@@ -17,7 +16,7 @@ import { usePathname } from "next/navigation";
 interface Props {
   friendsId: User[];
   requests: number;
-  user: User & { id: string };
+  user: any;
 }
 
 export default function MobileLayout({ friendsId, requests, user }: Props) {
