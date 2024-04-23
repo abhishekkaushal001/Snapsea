@@ -7,20 +7,10 @@ export async function middleware(req: NextRequest) {
   const isAuth = await getToken({ req });
   const isLoginPage = pathname.startsWith("/login");
 
-  if (isLoginPage) {
-    if (isAuth) {
-      return NextResponse.redirect(`${req.nextUrl.origin}/`);
-    }
-    return NextResponse.next();
-  }
-
-  if (!isAuth) {
+  if (isLoginPage && isAuth) {
     return NextResponse.redirect(`${req.nextUrl.origin}/`);
   }
-
-  // if (pathname === "/") {
-  //   return NextResponse.redirect(`${req.nextUrl.origin}/dashboard`);
-  // }
+  return NextResponse.next();
 }
 
 export const config = {
