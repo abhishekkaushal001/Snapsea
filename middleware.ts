@@ -7,17 +7,9 @@ export async function middleware(req: NextRequest) {
   const isAuth = await getToken({ req });
   const isLoginPage = pathname.startsWith("/login");
 
-  if (isLoginPage) {
-    if (isAuth) {
-      return NextResponse.redirect(`${req.nextUrl.origin}/`);
-    }
-    return NextResponse.redirect(`${req.nextUrl.origin}/login`);
-  }
-
-  if (!isAuth) {
+  if (isLoginPage && isAuth) {
     return NextResponse.redirect(`${req.nextUrl.origin}/`);
   }
-  return NextResponse.next();
 }
 
 export const config = {
