@@ -9,18 +9,18 @@ export async function middleware(req: NextRequest) {
 
   if (isLoginPage) {
     if (isAuth) {
-      return NextResponse.redirect(`${req.nextUrl.origin}/dashboard`);
+      return NextResponse.redirect(`${req.nextUrl.origin}/`);
     }
     return NextResponse.next();
   }
 
   if (!isAuth) {
-    return NextResponse.redirect(`${req.nextUrl.origin}/login`);
+    return NextResponse.redirect(`${req.nextUrl.origin}/`);
   }
 
-  if (pathname === "/") {
-    return NextResponse.redirect(`${req.nextUrl.origin}/dashboard`);
-  }
+  // if (pathname === "/") {
+  //   return NextResponse.redirect(`${req.nextUrl.origin}/dashboard`);
+  // }
 }
 
 export const config = {

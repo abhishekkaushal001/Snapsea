@@ -1,6 +1,6 @@
 "use client";
 
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { Toaster } from "react-hot-toast";
 
 const Providers = ({ children }: PropsWithChildren) => {

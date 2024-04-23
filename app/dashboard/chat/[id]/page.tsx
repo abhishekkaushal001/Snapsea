@@ -30,7 +30,7 @@ async function getChatMessages(chatId: string) {
 const ChatPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return redirect("/login");
+    return redirect("/");
   }
   const { user } = session;
 
@@ -46,7 +46,7 @@ const ChatPage = async ({ params }: Props) => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col h-full max-h-[91vh] md:max-h-none">
+      <div className="flex flex-col h-[91vh] md:h-full max-h-[91vh] md:max-h-none">
         <div className="w-full flex justify-between border-b-2 border-gray-200 px-5">
           <div className="flex align-middle items-center justify-center gap-5 py-1.5 md:py-3">
             <div className="relative h-10 w-10 md:h-16 md:w-16">

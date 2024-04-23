@@ -15,7 +15,7 @@ export interface User {
 const RequestsPage = async () => {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return redirect("/login");
+    return redirect("/");
   }
   const {
     user: { id, email },

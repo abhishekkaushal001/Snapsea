@@ -59,7 +59,7 @@ const Layout = async ({ children }: PropsWithChildren) => {
 
       <div className="hidden md:flex h-full w-full max-w-xs grow flex-col gap-y-3 overflow-y-auto border-r border-gray-200 bg-white px-6">
         <Link
-          href="/dashboard"
+          href="/"
           className="flex shrink-0 h-16 text-3xl font-semibold align-middle items-center text-slate-800 gap-x-2"
         >
           <GiBigWave className="h-8 w-auto text-indigo-600" />

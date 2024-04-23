@@ -75,7 +75,7 @@ export default function MobileLayout({ friendsId, requests, user }: Props) {
                       <div className="px-6 sm:px-6">
                         <Dialog.Title className="flex align-middle justify-between">
                           <Link
-                            href="/dashboard"
+                            href="/"
                             className="flex shrink-0 h-16 w-fit text-3xl font-semibold outline-none align-middle items-center text-slate-800 gap-x-2"
                           >
                             <GiBigWave className="h-8 w-auto text-indigo-600" />
@@ -140,8 +140,8 @@ export default function MobileLayout({ friendsId, requests, user }: Props) {
                               </div>
                             </div>
                           ) : null}
-                          <div className="-mx-6 mt-auto flex items-center w-full">
-                            <div className="flex flex-1 items-center gap-x-4 px-6 py-4 text-sm font-semibold leading-6 text-gray-900">
+                          <div className="mt-auto flex items-center w-full">
+                            <div className="flex flex-1 items-center gap-x-4 pr-6 py-4 text-sm font-semibold leading-6 text-gray-900">
                               <div className="relative h-10 w-10 bg-gray-50">
                                 <Image
                                   fill
