@@ -49,7 +49,7 @@ export default async function Home() {
         </div>
       </nav>
 
-      <div className="flex-1 w-full h-full grid pt-20 md:place-items-center">
+      <div className="flex-1 w-full h-full grid place-items-center">
         <div className="w-full px-2">
           <div className="flex flex-col align-middle md:text-center text-transparent bg-clip-text bg-gradient-to-bl md:bg-gradient-to-br from-cyan-500 via-pink-600 via-purple-600 to-amber-500">
             <h1 className="text-6xl md:text-8xl font-bold">Snapsea</h1>
