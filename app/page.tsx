@@ -49,7 +49,7 @@ export default async function Home() {
         </div>
       </nav>
 
-      <div className="flex-1 w-full h-full grid place-items-center">
+      <div className="flex-1 w-full h-full grid pt-20 md:place-items-center">
         <div className="w-full px-2">
           <div className="flex flex-col align-middle md:text-center text-transparent bg-clip-text bg-gradient-to-bl md:bg-gradient-to-br from-cyan-500 via-pink-600 via-purple-600 to-amber-500">
             <h1 className="text-6xl md:text-8xl font-bold">Snapsea</h1>
@@ -58,7 +58,7 @@ export default async function Home() {
             </h2>
           </div>
 
-          <div className="mt-4 md:mt-7 flex flex-col items-center align-middle md:text-center w-full">
+          <div className="mt-10 md:mt-7 flex flex-col items-center align-middle md:text-center w-full">
             <p className="border-[.5px] border-solid border-white/25 rounded-md md:py-2 p-1 md:px-4 w-fit text-transparent bg-clip-text bg-gradient-to-r from-white/20 via-white/40 via-white/80 via-white/40 to-white/20">
               Chat with realtime features & no downtime, Chats are end-to-end
               encrypted.
