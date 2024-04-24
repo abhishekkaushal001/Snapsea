@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
   const isLoginPage = pathname.startsWith("/login");
 
   if (isLoginPage && isAuth) {
-    return NextResponse.redirect(`${req.nextUrl.origin}/`);
+    return NextResponse.redirect(`${req.nextUrl.origin}/dashboard`);
   }
 }
 
