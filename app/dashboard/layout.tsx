@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import { PropsWithChildren, ReactNode } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { GiBigWave } from "react-icons/gi";
+import { MdSpaceDashboard } from "react-icons/md";
 
 interface OverviewOptions {
   id: number;
@@ -21,6 +22,12 @@ interface OverviewOptions {
 }
 
 export const overviewOptions: OverviewOptions[] = [
+  {
+    id: 2,
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: <MdSpaceDashboard className="h-4 w-4" />,
+  },
   {
     id: 1,
     name: "Add friend",

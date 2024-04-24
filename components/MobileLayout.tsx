@@ -5,13 +5,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { GiBigWave } from "react-icons/gi";
 import Button from "./ui/Button";
 import FriendRequestsSideBar from "./ui/FriendRequestsSideBar";
 import SideBarChatOptions from "./ui/SideBarChatOptions";
 import SignOutButton from "./ui/SignOutButton";
-import { usePathname } from "next/navigation";
 
 interface Props {
   friendsId: User[];
@@ -32,7 +32,7 @@ export default function MobileLayout({ friendsId, requests, user }: Props) {
     <div className="md:hidden">
       <div className="flex align-middle justify-between py-1 px-4 bg-gray-50 border-b border-indigo-300">
         <Link
-          href="/dashboard"
+          href="/"
           className="flex shrink-0 h-14 w-fit text-2xl font-semibold outline-none align-middle items-center text-slate-800 gap-x-2"
         >
           <GiBigWave className="h-7 w-auto text-indigo-600" />
