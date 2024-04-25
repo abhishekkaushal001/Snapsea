@@ -73,50 +73,54 @@ const FriendRequests = ({ incomingRequests, sessionId }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 mt-1 md:mt-4 min-w-fit">
+    <div className="flex flex-col gap-2 md:gap-3 mt-1 md:mt-4 md:min-w-fit">
       {requests.map((req) => (
         <div
-          className="flex items-center min-w-fit justify-center space-x-7 hover:shadow-sm p-5 border border-gray-200 rounded-md hover:border-gray-400 transition-all ease-in-out"
+          className="flex items-center min-w-fit justify-around md:justify-center space-x-2 md:space-x-7 hover:shadow-sm p-2 md:p-5 border border-gray-200 rounded-md hover:border-gray-400 transition-all duration-300 ease-in-out"
           key={req.id}
         >
-          <div className="relative h-[50px] w-[50px] items-center justify-center">
+          <div className="relative h-[30px] w-[30px] md:h-[50px] md:w-[50px] items-center justify-center">
             <Image
               alt={req.name}
               src={req.image}
               referrerPolicy="no-referrer"
-              className="rounded-md h-[50px] max-w-min my-auto"
+              className="rounded-md h-[30px] md:h-[50px] max-w-min my-auto"
               height={100}
               width={100}
               objectPosition="relative"
             />
           </div>
 
-          <div className="flex flex-col">
-            <span className="text-lg font-medium text-gray-900 ">
+          <div className="flex flex-col h-full">
+            <span className="text-base md:text-lg font-medium text-gray-900 ">
               {req.name}
             </span>
-            <span className="text-sm text-gray-400">{req.email}</span>
+            <span className="text-xs md:text-sm text-gray-400">
+              {req.email}
+            </span>
           </div>
 
-          <div className="flex items-center justify-center h-full w-full space-x-2">
+          <div className="flex items-center justify-end md:justify-center h-full w-full space-x-2">
             <button
               aria-label="accepet request"
-              className="bg-indigo-600 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center justify-center text-white p-2 rounded-md"
+              className="bg-indigo-600 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center justify-center text-white p-2 rounded-md text-sm md:text-base"
               onClick={() => confirmRequest(req.id)}
               disabled={isProcessing}
             >
               {isProcessing && (
-                <Loader2 className="animate-spin h-4 w-4 mr-1" />
+                <Loader2 className="animate-spin h-3 w-3 md:h-4 md:w-4 mr-1" />
               )}
               <span>Confirm</span>
             </button>
             <button
               aria-label="deny request"
-              className="bg-red-500 hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center justify-center text-white p-2 rounded-md"
+              className="bg-red-500 hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center justify-center text-white p-2 rounded-md text-sm md:text-base"
               onClick={() => denyRequest(req.id)}
               disabled={isdenying}
             >
-              {isdenying && <Loader2 className="animate-spin h-4 w-4 mr-1" />}
+              {isdenying && (
+                <Loader2 className="animate-spin h-3 w-3 md:h-4 md:w-4 mr-1" />
+              )}
               <span>Delete</span>
             </button>
           </div>

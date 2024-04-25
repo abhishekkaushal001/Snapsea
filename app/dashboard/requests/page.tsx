@@ -31,12 +31,12 @@ const RequestsPage = async () => {
   }
 
   return (
-    <main className="p-5 md:p-10">
+    <main className="p-3 md:p-10">
       <h1 className="text-3xl md:text-5xl text-gray-900 font-bold mb-3 md:mb-8">
         Friend requests
       </h1>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 md:gap-4">
         <FriendRequests incomingRequests={reqUsers!} sessionId={id} />
       </div>
     </main>
